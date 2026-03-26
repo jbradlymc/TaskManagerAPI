@@ -12,26 +12,26 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    private final TaskRepository repository;
+    private final TaskRepository taskRepository;
 
-    public TaskService(TaskRepository repository) {
-        this.repository = repository;
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
     public List<Task> getAllTasks() {
-        return repository.findAll();
+        return taskRepository.findAll();
     }
 
     public Optional<Task> getTaskById(Long id) {
-        return repository.findById(id);
+        return taskRepository.findById(id);
     }
 
     public Task createTask(Task task) {
-        return repository.save(task);
+        return taskRepository.save(task);
     }
 
     public Task updateTask(Long id, Task updatedTask) {
-        Optional<Task> optionalTask = repository.findById(id);
+        Optional<Task> optionalTask = taskRepository.findById(id);
 
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
@@ -40,7 +40,7 @@ public class TaskService {
             task.setDescription(updatedTask.getDescription());
             task.setStatus(updatedTask.getStatus());
 
-            return repository.save(task);
+            return taskRepository.save(task);
 
         } else {
             throw new RuntimeException("Task Not Found with id: " + id);
@@ -49,14 +49,14 @@ public class TaskService {
 
     @Transactional
     public Task updateStatus(Long id, TaskStatus updatedStatus) {
-        Optional<Task> optionalTask = repository.findById(id);
+        Optional<Task> optionalTask = taskRepository.findById(id);
 
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
 
             task.setStatus(updatedStatus);
 
-            return repository.save(task);
+            return taskRepository.save(task);
 
         } else {
             throw new RuntimeException("Task Not Found with id: " + id);
@@ -64,7 +64,7 @@ public class TaskService {
     }
 
     public void deleteTask(Long id) {
-        repository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 
 }

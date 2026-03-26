@@ -14,20 +14,20 @@ import java.util.Optional;
 @RequestMapping("/tasks/")
 public class TaskController {
 
-    private final TaskService service;
+    private final TaskService taskService;
 
-    public TaskController(TaskService service) {
-        this.service = service;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping("/all")
     public List<Task> getAllTasks() {
-        return service.getAllTasks();
+        return taskService.getAllTasks();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Long id) {
-        Optional<Task> optionalTask = service.getTaskById(id);
+        Optional<Task> optionalTask = taskService.getTaskById(id);
 
         if (optionalTask.isPresent()) {
             return ResponseEntity.ok(optionalTask.get());
@@ -38,22 +38,22 @@ public class TaskController {
 
     @PostMapping
     public Task createTask(@Valid @RequestBody Task task) {
-        return service.createTask(task);
+        return taskService.createTask(task);
     }
 
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @Valid @RequestBody Task task) {
-        return service.updateTask(id, task);
+        return taskService.updateTask(id, task);
     }
 
     @PatchMapping("/{id}/status")
     public Task updateStatus(@PathVariable Long id, @RequestBody TaskStatus status) {
-        return service.updateStatus(id, status);
+        return taskService.updateStatus(id, status);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
-        service.deleteTask(id);
+        taskService.deleteTask(id);
     }
 
 }
