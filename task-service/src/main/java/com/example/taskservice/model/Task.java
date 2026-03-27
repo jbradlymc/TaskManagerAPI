@@ -30,6 +30,8 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskStatus status = TaskStatus.PENDING;
 
+    private Long userId;
+
     public Task() {}
 
     public Task(String title, String description) {

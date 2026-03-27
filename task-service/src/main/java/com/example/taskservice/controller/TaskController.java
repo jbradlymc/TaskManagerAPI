@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tasks/")
+@RequestMapping("/tasks")
 public class TaskController {
 
     private final TaskService taskService;
@@ -34,6 +34,11 @@ public class TaskController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/users/{userId}")
+    public List<Task> getTasksByUserId(@PathVariable Long userId) {
+        return taskService.getTasksByUserId(userId);
     }
 
     @PostMapping

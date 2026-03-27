@@ -12,6 +12,6 @@
     <modules>
         <module>task-service</module>
         <module>user-service</module>
-        <!-- module>aggregator-service</module -->
+        <module>connector-service</module>
     </modules>
 </project>

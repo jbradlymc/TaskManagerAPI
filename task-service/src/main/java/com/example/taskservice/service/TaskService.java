@@ -22,11 +22,19 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+    public List<Task> getTasksByUserId(Long userId) {
+        return taskRepository.findByUserId(userId);
+    }
+
     public Optional<Task> getTaskById(Long id) {
         return taskRepository.findById(id);
     }
 
     public Task createTask(Task task) {
+
+        if(task.getUserId() == null) {
+            throw new RuntimeException("Task must have a userId");
+        }
         return taskRepository.save(task);
     }
 
@@ -65,6 +73,11 @@ public class TaskService {
 
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteTaskByUserId(Long userId) {
+        taskRepository.deleteByUserId(userId);
     }
 
 }
