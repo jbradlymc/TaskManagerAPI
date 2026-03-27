@@ -10,6 +10,6 @@ import java.util.List;
 @FeignClient(name = "task-service", url = "http://localhost:8081")
 public interface TaskClient {
 
-    @GetMapping("/tasks/{id}")
-    List<Task> getTasksByUserId(@PathVariable Long userId);
+    @GetMapping("/tasks/users/{userId}")
+    List<Task> getTasksByUserId(@PathVariable("userId") Long userId);
 }
